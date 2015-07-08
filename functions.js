@@ -1,3 +1,61 @@
+var fs = require('fs');
+var utils = require('utils');
+
+casper.options.verbose = true;
+casper.options.logLevel = casper.cli.get("logLevel") || 'debug';
+casper.options.exitOnError = false; // Keep going on error.
+casper.options.timeout = 10 * 60 * 1000; // 10 minutes.
+casper.options.clientScripts.push('js/jquery-2.1.4.min.js');
+casper.options.pageSettings = {
+  javascriptEnabled: true,
+  loadImages: true,
+  loadPlugins: false,
+  userAgent: 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.2 Safari/537.36'
+};
+casper.options.viewportSize = {
+  width: 1280,
+  height: 800
+};
+
+// Do not track CasperJS in GA.
+casper.options.onResourceRequested = function(casper, requestData, request) {
+  if (requestData.url.match(/google-analytics\.com/)) {
+    casper.log('Request to GA. Aborting: ' + requestData.url, 'debug');
+    request.abort();
+  }
+};
+
+// HTML logging.
+casper.on('open', function (location) {
+  this.echo(location + ' opened');
+});
+
+// Catch JS errors on the page.
+casper.on('page.error', function(msg, trace) {
+  this.test.fail('JavaScript Error: ' + msg);
+});
+
+// Catch load errors for the page resources.
+casper.on('resource.error', function(resourceError) {
+  if (resourceError.url != "" &&
+     !resourceError.url.match(/.*fonts\.net.*/) &&
+     !resourceError.url.match(/.*pbs\.twimg\.com.*/) &&
+     !resourceError.url.match(/.*twitter\.com.*/)
+  ) {
+    casper.log('Unable to load resource (#' + resourceError.id + 'URL:' + resourceError.url + ')', 'warning');
+    casper.log('Error code: ' + resourceError.errorCode + '. Description: ' + resourceError.errorString, 'warning');
+  }
+});
+
+// Screenshot fails.
+casper.on('step.error', function(failure) {
+  this.capture('fail.png');
+});
+
+var site = casper.cli.get("site");
+var timestamp = casper.cli.get("timestamp") || 1;
+
+
 // Turn a (possibly) relative URI into a full RFC 3986-compliant URI
 // With minor modifications, courtesy: https://gist.github.com/Yaffle/1088850
 function absoluteUri(base, href) {
@@ -34,7 +92,7 @@ function absoluteUri(base, href) {
 /**
  * Global pages tests, that are able to run on all valid Drupal pages.
  *
- * 11 test so far in here.
+ * 9 test so far in here (with the caching tests commented out).
  */
 function globalPageTests(casp) {
   casp.test.assertHttpStatus(200);

@@ -24,6 +24,7 @@ esac
 done
 
 if [ "${ENV}" == "TEST" ]; then
+    # TODO, replace this with the actual URL of the test site.
     SITE="http://education-test.gov.au/"
 else
     SITE="http://education.gov.au/"
