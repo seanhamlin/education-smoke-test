@@ -47,3 +47,7 @@ You can run the script with an optional parameter to get CasperJS debug output.
 ```
 ./run.sh -v
 ```
+
+## Example output
+
+![Example output from CasperJS](images/example-run.png)
