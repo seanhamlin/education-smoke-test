@@ -24,6 +24,10 @@ casper.options.onResourceRequested = function(casper, requestData, request) {
     casper.log('Request to GA. Aborting: ' + requestData.url, 'debug');
     request.abort();
   }
+  if (requestData.url.match(/pingdom\.net/)) {
+    casper.log('Request to Pingdom. Aborting: ' + requestData.url, 'debug');
+    request.abort();
+  }
 };
 
 // HTML logging.
