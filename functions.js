@@ -5,7 +5,8 @@ casper.options.verbose = true;
 casper.options.logLevel = casper.cli.get("logLevel") || 'debug';
 casper.options.exitOnError = false; // Keep going on error.
 casper.options.timeout = 10 * 60 * 1000; // 10 minutes.
-casper.options.clientScripts.push('js/jquery-2.1.4.min.js');
+// Uncomment if you need jQuery for your tests.
+//casper.options.clientScripts.push('js/jquery-2.2.4.min.js');
 casper.options.pageSettings = {
   javascriptEnabled: true,
   loadImages: true,

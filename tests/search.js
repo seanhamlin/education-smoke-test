@@ -16,7 +16,7 @@ casper.test.begin('Search results', 13, function suite(test) {
 
     // Search results.
     test.assertEvalEquals(function() {
-      return $('ol.search-results h3.title').length;
+      return document.querySelectorAll('ol.search-results h3.title').length;
     }, 15, 'Found 15 search results');
   });
 
