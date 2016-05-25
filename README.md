@@ -4,13 +4,13 @@ General smoke tests for the education.gov.au site. The idea is to reduce manual 
 
 ## Installation
 
-First you will need to install PhantomJS, the [2.0 release](http://phantomjs.org/download.html) is preferred. If you are running Mac OSX there is a critical bug that effects this, you will need this [fork](https://github.com/eugene1g/phantomjs/releases) in the mean time. Once you have downloaded the binary, symlink this to <code>/usr/local/bin/phantomjs</code>.
+First you will need to install PhantomJS, the [2.1.1 release](http://phantomjs.org/download.html) (or newer) is preferred. Once you have downloaded the binary, symlink this to <code>/usr/local/bin/phantomjs</code>.
 
 Next is CasperJS, you can git clone this repo
 
 ```
 git clone https://github.com/n1k0/casperjs.git
-git checkout master
+git checkout 1.1.1
 ```
 
 Then symlink the bin/casperjs script to <code>/usr/local/bin/casperjs</code>.
