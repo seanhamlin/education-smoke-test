@@ -51,3 +51,7 @@ You can run the script with an optional parameter to get CasperJS debug output.
 ## Example output
 
 ![Example output from CasperJS](images/example-run.png)
+
+## Read more
+
+I wrote a [blog post](http://www.pixelite.co.nz/article/starter-regression-test-suite-powered-by-casperjs/) on this framework, where I attempt to explain some of the features of the testing framework and why you might want to use it.
